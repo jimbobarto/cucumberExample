@@ -1,5 +1,7 @@
 package webDriver;
 
+import cucumber.api.java.Before;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -10,14 +12,20 @@ import net.lingala.zip4j.core.ZipFile;
 
 public class Driver {
     public static WebDriver driver;
+    final static Logger logger = Logger.getLogger(Driver.class);
 
-    public synchronized static WebDriver getCurrentDriver() {
+    public synchronized static WebDriver getDriver() {
         if (driver == null) {
             System.setProperty("webdriver.chrome.driver", "/Users/jamesbartlett/workspace/cucumberExample/src/test/resources/drivers/chromedriver");
             driver = new ChromeDriver();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
         return driver;
+    }
+
+    public synchronized static void quit() {
+        driver.quit();
+        driver = null;
     }
 
     public static void unzip(String source, String destination){
