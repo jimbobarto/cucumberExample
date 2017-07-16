@@ -31,8 +31,21 @@ public class EBay extends BaseStepDefinitions {
         wait.until(ExpectedConditions.textToBePresentInElement(HomePage.resultsString(), searchString));
     }
 
+    @When("I sort by \"([^\"]+)\"")
+    public void filter(String sortOption) {
+
+        HomePage.sortResults(sortOption);
+
+        wait.until(ExpectedConditions.textToBePresentInElement(HomePage.sortMenu(), sortOption));
+    }
+
     @Then("^I should see the search results for \"([^\"]*)\"$")
     public void checkThatResultsAppear(String searchCriteria) throws Throwable {
+        assert(HomePage.searchResultsCount() > 0);
+    }
+
+    @Then("^I should see the search results for \"([^\"]*)\" sorted by \"([^\"]*)\"$")
+    public void checkThatSortedResultsAppear(String searchCriteria, String sortOrder) throws Throwable {
         assert(HomePage.searchResultsCount() > 0);
     }
 }

@@ -9,3 +9,9 @@ Feature: Searching on eBay
     Given I am on the eBay homescreen
     When I search for "iPhone"
     Then I should see the search results for "iPhone"
+
+  Scenario: Search for the cheapest iPhone
+    Given I am on the eBay homescreen
+    When I search for "iPhone"
+    And I sort by "Lowest price"
+    Then I should see the search results for "iPhone" sorted by "Lowest price"

@@ -44,4 +44,15 @@ public class HomePage {
     public static String searchResultsString() {
         return driver.findElement(By.cssSelector("h1.rsHdr span.kwcat b")).getText();
     }
+
+    public static void sortResults(String sortOption) {
+        sortMenu().click();
+
+        WebElement sortMenuOption = driver.findElement(By.xpath("//ul[@id='SortMenu']/li/a[.='" + sortOption + "']"));
+        sortMenuOption.click();
+    }
+
+    public static WebElement sortMenu() {
+        return driver.findElement(By.cssSelector("a[aria-controls=SortMenu]"));
+    }
 }
